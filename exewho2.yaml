@@ -1,0 +1,29 @@
+title: ExeWho2 Use
+id: ea36c9f1-6aca-4668-8e50-5e4955ec42f3
+status: experimental
+description: Detects the usage of ExeWho2 CLI tool
+references:
+    - https://github.com/cyb3rkitties/exewho2
+    - https://cyb3rkitties.github.io/exewho2-download-execution-payload-red-teaming
+author: al3x perotti (cyb3rkitties)
+date: 2023/12/04
+tags:
+    - attack.execution
+    - attack.defense_evasion
+    - attack.command_and_control
+    - attack.t1059
+    - attack.t1071
+    - attack.t1105
+    - attack.t1027
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        - Image|endswith:
+            - '\exewho2.exe'
+        - CommandLine|contains:
+            - ' -u http://*.json '
+            - ' -u *.json* '
+    condition: selection
+level: high
